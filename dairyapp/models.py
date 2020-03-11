@@ -21,6 +21,7 @@ class MilkCategory(models.Model):
     CHOICES1 = (
         ('Cow','Cow'),
         ('Buffaloe','Buffalo'),#buffaloes
+        ('Buffaloe-Cow','Buffalo-Cow'),#buffaloes
         ('Others','Others'),
     )
     animalname= models.CharField(max_length=200,choices=CHOICES1)
@@ -69,7 +70,7 @@ class Profile(models.Model):
 class CustomerMilkCategory(models.Model):
     CHOICES1 = (
         ('Cow','Cow'),
-        ('Buffaloe','Buffalo'),#buffaloes
+        ('buffalo','Buffalo'),#buffaloes
         ('Others','Others'),
     )
     animalname= models.CharField(max_length=200,choices=CHOICES1)
@@ -82,7 +83,7 @@ class CustomerMilkCategory(models.Model):
         return f"{self.related_customer.first_name} {self.related_customer.last_name}"
 
     def __str__(self):
-        return f"{self.related_customer}: ({self.animalname}, ₹ {self.milkprice})"
+        return f"{self.related_customer}: ({self.animalname}, RS {self.milkprice})"
 
 
 class Customerledger(models.Model):
@@ -94,4 +95,4 @@ class Customerledger(models.Model):
     total = models.FloatField(max_length=1000000,db_index=True,default=0.0)
 
     def __str__(self):
-        return self.related_customer
+        return self.related_customer.first_name

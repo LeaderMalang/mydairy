@@ -90,12 +90,13 @@
     </div>
 
 
+<h3><a href="#" class="btn btn-warning" id="print" onclick="printContent('examples')">Print</a></h3>
+  <div class="table-responsive" id="examples">
 
-  <div class="table-responsive">
-      <table class="table table-bordered table-striped ">
+      <table class="table table-dark" >
 
 
-          <thead id="theadthid">
+          <thead id="theadthid" class="thead-dark">
             <tr >
                   <th scope="col">No.</th>
                   <th scope="col">Date</th>
@@ -115,9 +116,9 @@
             <th scope="row">{{ forloop.counter }}</th>
             <td>{{ data.date }}</td>
             <td>{{ data.related_milkcategory.animalname }} RS {{ data.related_milkcategory.milkprice }}</td>
-            <td> RS {{ data.price }}</td>
+            <td> RS: {{ data.price }}</td>
             <td>{{ data.quantity }} L</td>
-            <td> RS {% multiply data.quantity data.price %}</td>
+            <td> RS: {% multiply data.quantity data.price %}</td>
             <td>
 
               <form action="{% url 'ledger_delete' %}" method="POST">{% csrf_token %}
@@ -128,15 +129,23 @@
 {% endfor %}
 <tr>
 <td colspan="4"></td>
-<td id="totalid"><strong>{{ alltotal }}</strong></td>
+<td id="totalid"><strong>RS: {{ alltotal }}</strong></td>
 </tr>
           </tbody>
       </table>
   </div>
 <!-- script for datepicker -->
 <script>
+function printContent(el) {
+        var restorepage = document.body.innerHTML;
+        var printcontent = document.getElementById(el).innerHTML;
+        document.body.innerHTML = printcontent;
+        window.print();
+        document.body.innerHTML = restorepage;
+    }
 $(function() {
   $( "#datepicker" ).datepicker({dateFormat:"dd-mm-yy",});
+
 
 });
 </script>

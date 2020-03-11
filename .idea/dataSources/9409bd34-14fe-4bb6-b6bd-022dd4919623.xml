@@ -9,12 +9,13 @@
       <Owner>apple</Owner>
       <IntrospectionStateNumber>552</IntrospectionStateNumber>
       <Current>1</Current>
-      <Relations>sequence|table|16562|16564|1
+      <Relations>sequence|table|16601|16603|1
+sequence|table|16609|16611|1
+sequence|table|16562|16564|1
 sequence|table|16575|16577|1
 sequence|table|16586|16588|1
-sequence|table|16601|16603|1
-sequence|table|16609|16611|1
-sequence|table|16386|16388|1
+sequence|table|16554|16556|1
+sequence|table|16511|16513|1
 sequence|table|16397|16399|1
 sequence|table|16407|16409|1
 sequence|table|16415|16417|1
@@ -22,8 +23,7 @@ sequence|table|16425|16427|1
 sequence|table|16433|16435|1
 sequence|table|16443|16445|1
 sequence|table|16451|16453|1
-sequence|table|16511|16513|1
-sequence|table|16554|16556|1
+sequence|table|16386|16388|1
 </Relations>
     </database>
     <database id="3" parent="1" name="postgres">

@@ -52,9 +52,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'import_export',
     'dairyapp.apps.DairyappConfig',
     'crispy_forms',
+
 ]
+IMPORT_EXPORT_USE_TRANSACTIONS = True
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 
