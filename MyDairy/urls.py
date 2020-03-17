@@ -17,6 +17,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include,path,reverse
+from django.conf.urls import url
 from dairyapp import views
 
 urlpatterns = [
@@ -29,6 +30,7 @@ urlpatterns = [
         path('customer_ledger_delete/',views.customer_ledger_delete,name='customer_ledger_delete'),
         path('customer_milk_category/',views.customer_milk_category,name='customer_milk_category'),
         path('customer_ledger/<int:pk>/', views.customer_ledger, name='customer_ledger'),
+        url(r'^customer_ledgerRange/', views.customerLegder_DateRange, name='customerLegder_DateRange'),
         path('allvendor/', views.allvendor, name='allvendor'),
         path('addvendor/', views.addvendor, name='addvendor'),
         path('add_milk_category/',views.add_milk_category, name='add_milk_category'),

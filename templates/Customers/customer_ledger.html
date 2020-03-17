@@ -75,13 +75,57 @@
     </div>
 
 
+<h3><a href="#" class="btn btn-warning" id="btnLedger">Print</a></h3>
+    <!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong">
+  Print Specific Ledger
+</button>
 
+<!-- Modal -->
+<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Customer Ledger</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+            <form action="customer_ledgerRange" method="get" id="customerLegerRangeForm">
+                {% csrf_token %}
+              <div class="modal-body">
+
+                <div class="container-fluid">
+                    <div class="row">
+                      <div class="col-md-6">
+                          <div class="form-group">
+                            <label for="date-from" class="col-form-label">Date From:</label>
+                            <input type="text" class="form-control" id="date-from">
+                          </div>
+                      </div>
+                      <div class="col-md-6">
+                          <div class="form-group">
+                            <label for="date-to" class="col-form-label">Date To:</label>
+                            <input type="text" class="form-control" id="date-to">
+                          </div>
+                      </div>
+                    </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" id="printAction" class="btn btn-primary">Print</button>
+              </div>
+            </form>
+    </div>
+  </div>
+</div>
   <div class="table-responsive">
-      <table class="table table-bordered table-striped ">
+      <table class="table table-bordered table-striped" id="customerLedger">
 
 
-        <thead id="theadthid">
-          <tr >
+        <thead>
+          <tr>
                 <th scope="col">No.</th>
                 <th scope="col">Date</th>
                 <th scope="col">Milk Category</th>
@@ -92,11 +136,11 @@
             </tr>
         </thead>
 
-        <tbody id="tbodydata">
+        <tbody>
           {% for ledger in customer_ledger_info %}
 
           <tr>
-            <th scope="row">{{ forloop.counter }}</th>
+            <td scope="row">{{ forloop.counter }}</td>
             <td>{{ ledger.date }}</td>
             <td>{{ ledger.related_milk_category.animalname }} RS {{ ledger.related_milk_category.milkprice }}</td>
             <td> RS {{ ledger.price }}</td>
@@ -111,13 +155,110 @@
                 </td>
           </tr>
 {% endfor %}
-<tr>
-<td colspan="4"></td>
-<td id="totalid"><strong>{{ alltotal }}</strong></td>
-</tr>
+
+          </tbody>
+      </table>
+
+      <table>
+          <tbody>
+              <tr>
+                <td colspan="4"></td>
+                <td id="totalid"><strong>Total:-{{ alltotal }}</strong></td>
+              </tr>
           </tbody>
       </table>
   </div>
+
+   <div class="container" id="SalesInvoice" >
+      <div class="card">
+        <div class="card-header">
+        Invoice
+        <strong id="inoviceNumber">01/01/01/2018</strong>
+{#          <span class="float-right"> <strong>Status:</strong> Pending</span>#}
+
+        </div>
+            <div class="card-body">
+                <div class="row mb-4">
+                <div class="col-sm-6">
+                    <h6 class="mb-3">From:</h6>
+                    <div>
+                    <strong id="CompanyName">Organic Milk</strong>
+                    </div>
+                    <div id="address"><b>Address: </b>Millat Town </div>
+{#                    <div>71-101 Szczecin, Poland</div>#}
+                    <div id="companyEmail"><b>Email:</b> Organic.Milk@brand.com</div>
+                    <div id="CompanyPhone"><b>Phone:</b> 03336678552</div>
+                </div>
+
+                <div class="col-sm-6">
+                    <h6 class="mb-3">To:</h6>
+                    <div>
+                        <strong id="customerName"><b>Name:</b> Bob Mart</strong>
+                    </div>
+                    <div id="customerAddress"><b>Address:</b> Daniel Marek</div>
+{#                    <div>43-190 Mikolow, Poland</div>#}
+                    <div id="customerEmail"><b>Email:</b> marek@daniel.com</div>
+                    <div id="customerPhone"><b>Phone:</b> +48 123 456 789</div>
+                </div>
+
+
+
+                </div>
+
+                <div class="table-responsive-sm">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th class="center">#</th>
+                                <th>Date</th>
+{#                                <th>Milk Category</th>#}
+
+                                <th class="right">Price</th>
+                                <th class="center">Qty</th>
+                                <th class="right">Total</th>
+                            </tr>
+                        </thead>
+                        <tbody id="inoviceLines">
+                            <tr>
+                                <td class="center">1</td>
+                                <td class="left strong">Origin License</td>
+{#                                <td class="left">Extended License</td>#}
+
+                                <td class="right">$999,00</td><td class="center">1</td>
+                                <td class="right">$999,00</td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+                    <div class="row">
+                        <div class="col-lg-4 col-sm-5">
+
+                        </div>
+
+                        <div class="col-lg-4 col-sm-5 ml-auto">
+                            <table class="table table-clear">
+                                <tbody>
+
+
+                                    <tr>
+                                        <td class="left">
+                                        <strong>Total</strong>
+                                        </td>
+                                        <td class="right">
+                                        <strong id="totalAmount">$7.477,36</strong>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                        </div>
+
+                    </div>
+
+            </div>
+        </div>
+    </div>
 <!-- Script for datepicker -->
 <!-- <script>
 $( function() {
@@ -128,8 +269,110 @@ $( function() {
 } );
 </script> -->
 <script>
+//ajax Setup for Django
+function csrfSafeMethod(method) {
+    // these HTTP methods do not require CSRF protection
+    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+}
         $(function() {
-           $( "#datepicker" ).datepicker({dateFormat:"dd-mm-yy",});
+
+            var csrftoken=$("input[name='csrfmiddlewaretoken']").val();
+            var urlParam="{{ request.get_full_path }} ";
+            var res=urlParam.split('/');
+            var  pk=res[2];
+
+            $.ajaxSetup({
+                beforeSend: function(xhr, settings) {
+                    if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                        xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                    }
+                }
+            });
+           //Datatables
+            $('#customerLedger').DataTable();
+            //Datepicker
+            $( "#datepicker" ).datepicker({dateFormat:"dd-mm-yy",});
+            $('#date-from').datepicker({dateFormat:"dd-mm-yy",});
+            $('#date-to').datepicker({dateFormat:"dd-mm-yy",});
+            //Print View
+            function invoicePrint(obj){
+                var total=obj.alltotal;
+                var fullName=obj.customer_full_name;
+                var address=obj.address;
+                var number=obj.number;
+                var email=obj.email;
+                var MilkCategory=obj.milk_list;
+                var ledger=obj.customer_ledger_info;
+                console.log(ledger);
+                $('#totalAmount').html("RS: "+total);
+                $('#customerName').html("<b>Name: </b>"+fullName);
+                $('#customerAddress').html("<b>Address: </b>"+address);
+                $('#customerPhone').html("<b>Number: </b>"+number);
+                $('#customerEmail').html("<b>Email: </b>"+email);
+                var tr='';
+                var cnt=1
+                $.each(JSON.parse(ledger), function( index, value ) {
+                   var date=value.fields.date;
+                   var price=value.fields.price;
+                   var quantity=value.fields.quantity;
+                   var total=value.fields.total;
+
+                    {#if (MilkCategory[index] !=undefined)#}
+                    {#    if(value.fields.related_milk_category== MilkCategory[index][1])#}
+                    {#        var milkCategory=MilkCategory[index][0]#}
+                    {#else#}
+                    {#    var milkCategory=MilkCategory[0][0]#}
+                  console.log( date + ": " + price+  ": " + quantity + ": " + total);
+                  tr+="<tr><td>"+cnt+"</td>";
+                  tr+="<td>"+date+"</td>";
+                  tr+="<td>RS: "+price+"</td>";
+                  tr+="<td>"+quantity+" L</td>";
+                  tr+="<td>RS: "+total+"</td></tr>";
+                  cnt++;
+                });
+                var d = new Date();
+                $('#inoviceNumber').html(cnt+"/"+d.getDate()+"/"+d.getMonth()+"/"+d.getFullYear());
+                $('#inoviceLines').html(tr);
+                $('#btnLedger').trigger('click');
+                return false;
+
+            }
+
+            //customerLedger Ajax
+            $('#customerLegerRangeForm').submit(function(e){
+                var date_from=$('#date-from').val();
+                var date_to=$('#date-to').val();
+                e.preventDefault();
+                $.ajax({
+                    url:'/customer_ledgerRange/',
+                    type:"get",
+
+                    data:{"pk":pk,"date_from":date_from,"date_to":date_to}
+                }).done(function (data) {
+                    console.log('Success');
+                    invoicePrint(data)
+                }).fail(function (err) {
+                    console.log(err);
+                });
+
+            });
+            $("#btnLedger").printPreview({
+                obj2print:'#SalesInvoice',
+                width:'810',
+
+                /*optional properties with default values*/
+                //obj2print:'body',     /*if not provided full page will be printed*/
+                //style:'',             /*if you want to override or add more css assign here e.g: "<style>#masterContent:background:red;</style>"*/
+                //width: '670',         /*if width is not provided it will be 670 (default print paper width)*/
+                //height:screen.height, /*if not provided its height will be equal to screen height*/
+                //top:0,                /*if not provided its top position will be zero*/
+                //left:'center',        /*if not provided it will be at center, you can provide any number e.g. 300,120,200*/
+                //resizable : 'yes',    /*yes or no default is yes, * do not work in some browsers*/
+                //scrollbars:'yes',     /*yes or no default is yes, * do not work in some browsers*/
+                //status:'no',          /*yes or no default is yes, * do not work in some browsers*/
+                title:'Dairy System' /*title of print preview popup window*/
+
+            });
 
         });
      </script>

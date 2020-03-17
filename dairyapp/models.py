@@ -13,6 +13,7 @@ class Vendor(models.Model):
     vendorcontact = models.CharField(max_length=14,db_index=True)
     status = models.BooleanField(default=True)
 
+
     def __str__(self):
         return self.vendorname
 
@@ -20,8 +21,8 @@ class Vendor(models.Model):
 class MilkCategory(models.Model):
     CHOICES1 = (
         ('Cow','Cow'),
-        ('Buffaloe','Buffalo'),#buffaloes
-        ('Buffaloe-Cow','Buffalo-Cow'),#buffaloes
+        ('Buffalo','Buffalo'),#buffaloes
+        ('Buffalo-Cow','Buffalo-Cow'),#buffaloes
         ('Others','Others'),
     )
     animalname= models.CharField(max_length=200,choices=CHOICES1)
@@ -59,8 +60,14 @@ class Profile(models.Model):
     contact_number = models.CharField(max_length=20,null=True,unique=True)
     joining_data = models.DateField(auto_now_add=False)
     address = models.CharField(max_length=500,null=True)
+    image = models.ImageField(upload_to='profile/%Y/%m/%d', blank=True,null=True,
+                             verbose_name='Image')
 
-
+    def image_tag(self):
+        from django.utils.html import mark_safe
+        return mark_safe('<img src="/media/%s" width="150" height="150" />' % (self.image))
+    image_tag.short_description = 'Image'
+    image_tag.allow_tags = True
     class Meta:
         ordering = ('-user_type',)
 

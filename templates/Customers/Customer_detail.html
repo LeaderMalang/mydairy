@@ -4,20 +4,21 @@
 
 {% block content %}
  {% if user.is_authenticated and user.profile.user_type == 'Manager' %}
- <div class="table-responsive">
-      <table class="table table-bordered table-striped ">
+ <div class="table-responsive" >
+      <table  id="allcustomers">
 
 
-          <thead id="theadthid">
-            <tr>
-                  <th scope="col">Customer Name</th>
-                  <th scope="col">Contact Number</th>
-                  <th scope="col">Address</th>
-                  <th scope="col">Email id</th>
-            </tr>
+          <thead>
+                <tr>
+                  <th >Customer Name</th>
+                  <th >Contact Number</th>
+                  <th >Address</th>
+                  <th>Email id</th>
+                  <th>Image</th>
+                </tr>
           </thead>
 
-          <tbody id="tbodydata">
+          <tbody>
           {% for data in customerinfo %}
             {% if data.user_type == 'Customer' %}
             <tr>
@@ -26,12 +27,18 @@
             <td>{{ data.contact_number}}</td>
             <td>{{ data.address }}</td>
             <td>{{ data.user.email}}</td>
+            <td>{{ data.image_tag}}</td>
             </tr>
             {% endif %}
         {% endfor %}
           </tbody>
       </table>
   </div>
+<script>
+    $(document).ready( function () {
+        $('#allcustomers').DataTable();
+    });
 
+</script>
 {% endif %}
 {% endblock %}

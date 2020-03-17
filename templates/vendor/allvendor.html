@@ -5,17 +5,17 @@
 
 
 <div class="table-responsive">
-<table class="table table-bordered table-striped ">
-  <thead id="theadthid">
+<table class="table table-bordered table-striped " id="allvendors">
+  <thead>
     <tr>
-      <th scope="col">Vendor Name</th>
-      <th scope="col">Joining Date</th>
-      <th scope="col">Contact</th>
-      <th scope="col">Address</th>
-      <th scope="col">Status</th>
+      <th>Vendor Name</th>
+      <th>Joining Date</th>
+      <th>Contact</th>
+      <th>Address</th>
+      <th>Status</th>
     </tr>
   </thead>
-  <tbody id="tbodydata">
+  <tbody>
     {% for vendorobj in vendor %}
     <tr>
       
@@ -35,6 +35,11 @@
 </table>
 </div>
 
+<script>
+    $(document).ready( function () {
+        $('#allvendors').DataTable();
+    });
 
+</script>
 {% endif %}
 {% endblock %}

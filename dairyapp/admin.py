@@ -1,23 +1,20 @@
 from django.contrib import admin
 from dairyapp.models import Profile, Vendor, MilkCategory, vendorledger, CustomerMilkCategory,Customerledger
 from django.contrib.auth.models import User
-from import_export.admin import ImportExportModelAdmin
+
 #from import_export.admin import ExportMixin
-from .resources import VendorResource
 
 
 
 
-# class Vendor_Admin(admin.ModelAdmin):
-#     list_display = ['vendorname','managername','joiningdate', 'vendorcontact']
-#     class Meta:
-#         model=Vendor
+class Vendor_Admin(admin.ModelAdmin):
+    list_display = ['vendorname','managername','joiningdate', 'vendorcontact']
+    class Meta:
+        model=Vendor
 
 
-class VendorAdmin(ImportExportModelAdmin,admin.ModelAdmin):
-    resource_class=VendorResource
 
-admin.site.register(Vendor,VendorAdmin)
+admin.site.register(Vendor,Vendor_Admin)
 
 class MilkCategory_Admin(admin.ModelAdmin):
     list_display = ['animalname','milkprice','related_vendor']
@@ -36,7 +33,9 @@ admin.site.register(vendorledger,vendorledger_Admin)
 #****************************************************************************************************
 
 class Profile_Admin(admin.ModelAdmin):
-    list_display =['__str__','user_type','contact_number','address']
+    list_display =['__str__','user_type','contact_number','address','image_tag']
+    fields = ['user','user_type','contact_number','address','image','image_tag']
+    readonly_fields = ['image_tag']
 admin.site.register(Profile,Profile_Admin)
 
 class CustomerMilkCategory_Admin(admin.ModelAdmin):

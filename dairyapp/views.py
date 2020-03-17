@@ -7,6 +7,9 @@ from dairyapp import models
 from django.shortcuts import get_object_or_404
 from dairyapp.forms import AddVendorForm,vendorledgerForm,MilkCategoryForm,ProfileForm,SignUpForm,CustomerMilkCategoryForm,contactForm
 from django.template.loader import get_template
+import json
+from django.http import HttpResponse
+from django.core.serializers import serialize
 from django.core.mail import send_mail
 from django.conf import settings
 
@@ -99,12 +102,41 @@ def Customer_page(request):
 
     return render(request,'Customers/customer.html',{'customer_info':customer_info,'alltotal':alltotal})
 
+#CustomerLedger in Date Range
+def customerLegder_DateRange(request):
+    pk = request.GET.get('pk', None)
+    date_from = request.GET.get('date_from', None)
+    date_to = request.GET.get('date_to', None)
+    customer_obj = get_object_or_404(User, pk=pk)
+    cus_user_info = models.Profile.objects.filter(user=customer_obj)
+    customer_ledger_info = models.Customerledger.objects.filter(related_customer=customer_obj).filter(date__range=[date_from, date_to]).order_by('-date')
+    milktypes = models.CustomerMilkCategory.objects.filter(related_customer=customer_obj)
+    milk_list = [(milk.animalname + "-" + str(milk.milkprice), milk.pk) for milk in milktypes]
+    customer_full_name = f"{customer_obj.first_name} {customer_obj.last_name}"
+    address=cus_user_info[0].address
+    number=cus_user_info[0].contact_number
+    email=cus_user_info[0].user.email
+    alltotal = 0.0
+    for i in customer_ledger_info:
+        alltotal = alltotal + float(i.total)
+    #print(alltotal)
 
+    response_data = {}
+
+
+    response_data['alltotal'] = alltotal
+    response_data['customer_full_name'] = customer_full_name
+    response_data['address'] = address
+    response_data['number'] = number
+    response_data['email'] = email
+    response_data['milk_list'] = milk_list
+    response_data['customer_ledger_info']=serialize('json', customer_ledger_info)
+    return HttpResponse(json.dumps(response_data), content_type="application/json")
 #Customerleder
 def customer_ledger(request,pk):
     customer_obj = get_object_or_404(User,pk=pk)
     cus_user_info = models.Profile.objects.filter(user=customer_obj)
-    customer_ledger_info = models.Customerledger.objects.filter(related_customer = customer_obj)
+    customer_ledger_info = models.Customerledger.objects.filter(related_customer = customer_obj).order_by('-date')
     milktypes = models.CustomerMilkCategory.objects.filter(related_customer = customer_obj)
     milk_list = [(milk.animalname +"-"+ str(milk.milkprice), milk.pk) for milk in milktypes]
 
