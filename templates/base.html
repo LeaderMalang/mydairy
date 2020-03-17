@@ -206,7 +206,96 @@ thead, tbody tr {
       {% endblock %}
 
 </div>
+<div class="container" id="SalesInvoice">
+      <div class="card">
+        <div class="card-header">
+        Invoice
+        <strong id="inoviceNumber">01/01/01/2018</strong>
+{#          <span class="float-right"> <strong>Status:</strong> Pending</span>#}
 
+        </div>
+            <div class="card-body">
+                <div class="row mb-4">
+                <div class="col-sm-6">
+                    <h6 class="mb-3">From:</h6>
+                    <div>
+                    <strong id="CompanyName">Organic Milk</strong>
+                    </div>
+                    <div id="address"><b>Address: </b>Millat Town </div>
+{#                    <div>71-101 Szczecin, Poland</div>#}
+                    <div id="companyEmail"><b>Email:</b> Organic.Milk@brand.com</div>
+                    <div id="CompanyPhone"><b>Phone:</b> 03336678552</div>
+                </div>
+
+                <div class="col-sm-6">
+                    <h6 class="mb-3">To:</h6>
+                    <div>
+                        <strong id="customerName"><b>Name:</b> Bob Mart</strong>
+                    </div>
+                    <div id="customerAddress"><b>Address:</b> Daniel Marek</div>
+{#                    <div>43-190 Mikolow, Poland</div>#}
+                    <div id="customerEmail"><b>Email:</b> marek@daniel.com</div>
+                    <div id="customerPhone"><b>Phone:</b> +48 123 456 789</div>
+                </div>
+
+
+
+                </div>
+
+                <div class="table-responsive-sm">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th class="center">#</th>
+                                <th>Date</th>
+{#                                <th>Milk Category</th>#}
+
+                                <th class="right">Price</th>
+                                <th class="center">Qty</th>
+                                <th class="right">Total</th>
+                            </tr>
+                        </thead>
+                        <tbody id="inoviceLines">
+                            <tr>
+                                <td class="center">1</td>
+                                <td class="left strong">Origin License</td>
+{#                                <td class="left">Extended License</td>#}
+
+                                <td class="right">$999,00</td><td class="center">1</td>
+                                <td class="right">$999,00</td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+                    <div class="row">
+                        <div class="col-lg-4 col-sm-5">
+
+                        </div>
+
+                        <div class="col-lg-4 col-sm-5 ml-auto">
+                            <table class="table table-clear">
+                                <tbody>
+
+
+                                    <tr>
+                                        <td class="left">
+                                        <strong>Total</strong>
+                                        </td>
+                                        <td class="right">
+                                        <strong id="totalAmount">$7.477,36</strong>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                        </div>
+
+                    </div>
+
+            </div>
+        </div>
+    </div>
 <script src="{% static 'js/printPreview.js'%}"></script>
   <script>
 //ajax Setup for Django
