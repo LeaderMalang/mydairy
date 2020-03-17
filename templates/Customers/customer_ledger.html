@@ -169,7 +169,7 @@
       </table>
   </div>
 
-   <div class="container" id="SalesInvoice" style="opacity: 0;">
+   <div class="container" id="SalesInvoice">
       <div class="card">
         <div class="card-header">
         Invoice
@@ -268,114 +268,7 @@ $( function() {
   // $( "#datepicker" ).datepicker("setDate","0");
 } );
 </script> -->
-<script>
-//ajax Setup for Django
-function csrfSafeMethod(method) {
-    // these HTTP methods do not require CSRF protection
-    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
-}
-        $(function() {
 
-            var csrftoken=$("input[name='csrfmiddlewaretoken']").val();
-            var urlParam="{{ request.get_full_path }} ";
-            var res=urlParam.split('/');
-            var  pk=res[2];
-
-            $.ajaxSetup({
-                beforeSend: function(xhr, settings) {
-                    if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
-                        xhr.setRequestHeader("X-CSRFToken", csrftoken);
-                    }
-                }
-            });
-           //Datatables
-            $('#customerLedger').DataTable();
-            //Datepicker
-            $( "#datepicker" ).datepicker({dateFormat:"dd-mm-yy",});
-            $('#date-from').datepicker({dateFormat:"dd-mm-yy",});
-            $('#date-to').datepicker({dateFormat:"dd-mm-yy",});
-            //Print View
-            function invoicePrint(obj){
-                var total=obj.alltotal;
-                var fullName=obj.customer_full_name;
-                var address=obj.address;
-                var number=obj.number;
-                var email=obj.email;
-                var MilkCategory=obj.milk_list;
-                var ledger=obj.customer_ledger_info;
-                console.log(ledger);
-                $('#totalAmount').html("RS: "+total);
-                $('#customerName').html("<b>Name: </b>"+fullName);
-                $('#customerAddress').html("<b>Address: </b>"+address);
-                $('#customerPhone').html("<b>Number: </b>"+number);
-                $('#customerEmail').html("<b>Email: </b>"+email);
-                var tr='';
-                var cnt=1
-                $.each(JSON.parse(ledger), function( index, value ) {
-                   var date=value.fields.date;
-                   var price=value.fields.price;
-                   var quantity=value.fields.quantity;
-                   var total=value.fields.total;
-
-                    {#if (MilkCategory[index] !=undefined)#}
-                    {#    if(value.fields.related_milk_category== MilkCategory[index][1])#}
-                    {#        var milkCategory=MilkCategory[index][0]#}
-                    {#else#}
-                    {#    var milkCategory=MilkCategory[0][0]#}
-                  console.log( date + ": " + price+  ": " + quantity + ": " + total);
-                  tr+="<tr><td>"+cnt+"</td>";
-                  tr+="<td>"+date+"</td>";
-                  tr+="<td>RS: "+price+"</td>";
-                  tr+="<td>"+quantity+" L</td>";
-                  tr+="<td>RS: "+total+"</td></tr>";
-                  cnt++;
-                });
-                var d = new Date();
-                $('#inoviceNumber').html(cnt+"/"+d.getDate()+"/"+d.getMonth()+"/"+d.getFullYear());
-                $('#inoviceLines').html(tr);
-                $('#btnLedger').trigger('click');
-                return false;
-
-            }
-
-            //customerLedger Ajax
-            $('#customerLegerRangeForm').submit(function(e){
-                var date_from=$('#date-from').val();
-                var date_to=$('#date-to').val();
-                e.preventDefault();
-                $.ajax({
-                    url:'/customer_ledgerRange/',
-                    type:"get",
-
-                    data:{"pk":pk,"date_from":date_from,"date_to":date_to}
-                }).done(function (data) {
-                    console.log('Success');
-                    invoicePrint(data)
-                }).fail(function (err) {
-                    console.log(err);
-                });
-
-            });
-            $("#btnLedger").printPreview({
-                obj2print:'#SalesInvoice',
-                width:'810',
-
-                /*optional properties with default values*/
-                //obj2print:'body',     /*if not provided full page will be printed*/
-                //style:'',             /*if you want to override or add more css assign here e.g: "<style>#masterContent:background:red;</style>"*/
-                //width: '670',         /*if width is not provided it will be 670 (default print paper width)*/
-                //height:screen.height, /*if not provided its height will be equal to screen height*/
-                //top:0,                /*if not provided its top position will be zero*/
-                //left:'center',        /*if not provided it will be at center, you can provide any number e.g. 300,120,200*/
-                //resizable : 'yes',    /*yes or no default is yes, * do not work in some browsers*/
-                //scrollbars:'yes',     /*yes or no default is yes, * do not work in some browsers*/
-                //status:'no',          /*yes or no default is yes, * do not work in some browsers*/
-                title:'Dairy System' /*title of print preview popup window*/
-
-            });
-
-        });
-     </script>
 
 
 {% endblock %}
