@@ -1,15 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="98005944-3e89-493c-82bd-ca31910527c8" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/9409bd34-14fe-4bb6-b6bd-022dd4919623.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/9409bd34-14fe-4bb6-b6bd-022dd4919623.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/Customers/customer_ledger.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/Customers/customer_ledger.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/vendor/vendorledger.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/vendor/vendorledger.html" afterDir="false" />
-    </list>
+    <list default="true" id="98005944-3e89-493c-82bd-ca31910527c8" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -167,7 +159,7 @@
       <workItem from="1585167808576" duration="330000" />
       <workItem from="1586021654502" duration="510000" />
       <workItem from="1586033281223" duration="719000" />
-      <workItem from="1586280739706" duration="800000" />
+      <workItem from="1586280739706" duration="1046000" />
     </task>
     <servers />
   </component>
