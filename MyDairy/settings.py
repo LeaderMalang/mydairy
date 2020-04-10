@@ -102,8 +102,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'mydairy',
-        'USER': 'django',
-        'PASSWORD': '123',
+        'USER': 'noman',
+        'PASSWORD': 'butt',
         'HOST': 'localhost',
         'PORT': '5432',
     }
