@@ -13,7 +13,7 @@ openpyxl==3.0.3
 Pillow==6.2.2
 psycopg2==2.8.2
 pytz==2019.3
-PyYAML==5.3
+PyYAML==5.4
 reportlab==3.5.34
 six==1.14.0
 sqlparse==0.3.1
